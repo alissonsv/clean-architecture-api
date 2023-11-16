@@ -4,6 +4,7 @@ import type { Validation } from '../../presentation/helpers/validators/validatio
 import { CompareFieldsValidation } from '../../presentation/helpers/validators/compare-fields-validation'
 import { EmailValidation } from '../../presentation/helpers/validators/email-validation'
 import { EmailValidatorAdapter } from '../../utils/email-validator-adapter'
+import { StringFieldValidation } from '../../presentation/helpers/validators/string-field-validation'
 
 export const makeSignUpValidation = (): ValidationComposite => {
   const validations: Validation[] = []
@@ -11,6 +12,7 @@ export const makeSignUpValidation = (): ValidationComposite => {
     validations.push(new RequiredFieldValidation(field))
   }
 
+  validations.push(new StringFieldValidation('password'))
   validations.push(new CompareFieldsValidation('password', 'passwordConfirmation'))
   validations.push(new EmailValidation('email', new EmailValidatorAdapter()))
 
